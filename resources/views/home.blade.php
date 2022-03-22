@@ -35,7 +35,6 @@
                     </a>
                 </div>
             </div>
-
         </section>
         {{-- Projects --}}
         <section id="projects" class="w-full">
@@ -166,6 +165,38 @@
                         </div>
                     </div>
                 </article>
+                <article class="card">
+                    <div class="skills">
+                        <img class="w-12 pb-3" src="{{ asset('assets/tailwind.png') }}" alt="">
+                        <div
+                            class="relative rounded-full overflow-hidden w-56 h-2 bg-grayBar after:content-[''] after:w-44 after:h-2 after:bg-redOne  after:absolute">
+                        </div>
+                    </div>
+                </article>
+                <article class="card">
+                    <div class="skills">
+                        <img class="w-12 pb-3" src="{{ asset('assets/bootstrap.png') }}" alt="">
+                        <div
+                            class="relative rounded-full overflow-hidden w-56 h-2 bg-grayBar after:content-[''] after:w-40 after:h-2 after:bg-redOne  after:absolute">
+                        </div>
+                    </div>
+                </article>
+                <article class="card">
+                    <div class="skills">
+                        <img class="w-12 pb-3" src="{{ asset('assets/digital.png') }}" alt="">
+                        <div
+                            class="relative rounded-full overflow-hidden w-56 h-2 bg-grayBar after:content-[''] after:w-36 after:h-2 after:bg-redOne  after:absolute">
+                        </div>
+                    </div>
+                </article>
+                <article class="card">
+                    <div class="skills">
+                        <img class="w-12 pb-3" src="{{ asset('assets/ubuntu.png') }}" alt="">
+                        <div
+                            class="relative rounded-full overflow-hidden w-56 h-2 bg-grayBar after:content-[''] after:w-28 after:h-2 after:bg-redOne  after:absolute">
+                        </div>
+                    </div>
+                </article>
             </div>
         </section>
         {{-- Let's talk --}}
@@ -174,34 +205,62 @@
             <h3 class="font-bold text-4xl text-redOne text-center mb-4">Let's talk</h3>
             <div class="max-w-7xl mx-auto w-11/12 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 mb-16">
                 <div class="flex flex-col justify-center">
-                    <form action="" class="sm:w-4/5 w-full">
-                        <div>
+                    <form action="{{ route('contact') }}" method="POST" class="sm:w-4/5 w-full">
+                        @csrf
+                        <div class="mb-4">
                             <label class="text-white" for="name">Name:</label>
                             <div class="border-b-2 border-redOne w-full">
-                                <input id="name"
-                                    class="appearance-none bg-transparent border-none w-full focus:border-2 focus:border-redOne"
-                                    type="text">
+                                <input value="{{ old('name') }}" id="name" name="name"
+                                    class="appearance-none bg-transparent border-none w-full text-white" type="text"
+                                    required>
                             </div>
                         </div>
-                        <div>
+                        @error('name')
+                            <small class="text-white pb-4 block">* {{ $message }}</small>
+                        @enderror
+                        <div class="mb-4">
                             <label class="text-white" for="email">E-mail:</label>
                             <div class="border-b-2 border-redOne w-full">
-                                <input id="email"
-                                    class="appearance-none bg-transparent border-none w-full focus:border-2 focus:border-redOne"
-                                    type="text">
+                                <input id="email" value="{{ old('email') }}"
+                                    class="appearance-none bg-transparent border-none w-full text-white" type="email"
+                                    name="email" required>
                             </div>
                         </div>
+                        @error('email')
+                            <small class="text-white pb-4 block">* {{ $message }}</small>
+                        @enderror
                         <div class="mb-8 w-full">
-                            <label class="text-white" for="msg">Your Message:</label>
+                            <label class="text-white" for="message">Your Message:</label>
                             <div class="border-b-2 border-redOne w-full">
-                                <textarea class="bg-transparent border-none w-full" name="msg" id="msg"></textarea>
+                                <textarea class="bg-transparent border-none w-full text-white" name="message" id="message"
+                                    required>{{ old('message') }}</textarea>
                             </div>
                         </div>
+                        @error('message')
+                            <small class="text-white pb-4 block">* {{ $message }}</small>
+                        @enderror
                         <input
                             class="bg-redOne px-2 py-1 rounded-full text-white hover:scale-110 transition-all cursor-pointer"
                             type="submit">
-
                     </form>
+                    @if (session('info'))
+                    <div id="toast"
+                        class="fixed top-24 right-0 bg-redOne text-white rounded-tl-full rounded-bl-full py-2 pl-2 pr-1 flex flex-1 items-center gap-1 transition-all">
+                        {{-- <p>{{ session('info') }}</p> --}}
+                        <img class="h-full" src="{{ asset('assets/close.png') }}" alt="">
+                        <p> Mensaje enviado</p>
+                    </div>
+                    @endif
+
+                    @if (session('info'))
+                      <script>
+                        setTimeout(function(){
+                          $toast = document.getElementById('toast')
+                          $toast.style.transform = 'translatex(200px)';
+                      }, 2000);
+                      </script>
+                    @endif
+
                 </div>
                 <div class="sm:h-96 sm:flex items-center justify-center hidden">
                     <img class="h-full w-48 sm:w-auto" src="{{ asset('assets/contact.png') }}" alt="">

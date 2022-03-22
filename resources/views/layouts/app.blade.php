@@ -17,6 +17,20 @@
 
         @livewireStyles
 
+        <style>
+          ::-webkit-scrollbar {
+              width: 12px;
+          }
+          ::-webkit-scrollbar-track {
+              -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1); 
+              border-radius: 10px;
+          }
+          ::-webkit-scrollbar-thumb {
+              border-radius: 10px;  
+              -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2);
+          }
+        </style>
+
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
