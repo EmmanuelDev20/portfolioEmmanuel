@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\CaptchaValidationController;
 
 Route::get('/', function () {
     return view('home');
